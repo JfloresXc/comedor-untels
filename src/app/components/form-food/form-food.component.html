@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="addOrEdit()">
+  <div class="mb-3">
+    <input
+      type="text"
+      formControlName="nombre"
+      class="form-control"
+      placeholder="Nombre"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="text"
+      formControlName="precio"
+      class="form-control"
+      placeholder="Precio"
+    />
+  </div>
+  <div class="mb-3">
+    <textarea
+      type="text"
+      formControlName="descripcion"
+      class="form-control"
+      placeholder="Descripción"
+    ></textarea>
+  </div>
+  <!-- <div class="mb-3">
+    <input
+      type="file"
+      formControlName="file"
+      class="form-control"
+      (change)="handleChangeFile($event)"
+    />
+  </div> -->
+
+  <button class="btn btn-primary form-control" [disabled]="form.invalid">
+    {{ textButtonSubmit }}
+  </button>
+</form>
