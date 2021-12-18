@@ -1,14 +1,8 @@
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <app-form-food></app-form-food>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <app-food-list></app-food-list>
-    </div>
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container mt-3">
+    <app-food-list></app-food-list>
   </div>
 </div>

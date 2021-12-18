@@ -1,0 +1,31 @@
+.menu__date-group {
+  display: flex;
+  margin-top: 0.625em;
+}
+
+.menu__list-checks {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.menu__list-previews {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.menu_tab {
+  min-height: 400px;
+}
+
+.menu__tab-item {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.625em;
+  min-height: 350px;
+}
+
+.menu__button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.625em;
+}

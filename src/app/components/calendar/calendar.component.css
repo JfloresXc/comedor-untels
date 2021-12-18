@@ -1,0 +1,57 @@
+.calendar__dayOfWeek,
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625em;
+}
+
+.calendar_content {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 40px;
+  gap: 0.625em;
+  min-height: 110vh;
+  padding: 0;
+}
+
+.calendar__day {
+  background: rgb(240, 240, 240);
+  position: relative;
+  cursor: pointer;
+}
+
+.calendar__day:hover {
+  background: rgb(218, 216, 216);
+}
+
+.calendar__numberDay {
+  position: absolute;
+  top: 0.625em;
+  right: 0.625em;
+  color: #212529;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.calendar__info {
+  position: absolute;
+  bottom: 10px;
+  left: 0.625em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calendar__point {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--bs-red);
+  color: var(--bs-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8em;
+}

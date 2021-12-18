@@ -1,0 +1,8 @@
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container py-3 text-center">
+    <app-calendar [menus]="menus"></app-calendar>
+  </div>
+</div>

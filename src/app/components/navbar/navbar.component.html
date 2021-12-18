@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/">CRUD DE COMIDAS</a>
+    <a [routerLink]="['/foods']" class="navbar-brand">FOODS</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,7 +14,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <a [routerLink]="['/foods/add']" class="btn btn-outline-success"
+        >Add Food</a
+      >
+      <a [routerLink]="['/menu']" class="btn btn-outline-success">Menu</a>
+      <a [routerLink]="['/menu/edit']" class="btn btn-outline-success"
+        >Menu edit</a
+      >
       <button class="btn btn-outline-primary">Logout</button>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<mat-toolbar color="primary" class="navbar">
+  <div class="container">
+    <span>Comedor Untels</span>
+    <span class="example-spacer"></span>
+    <a href=""></a>
+    <a mat-button [routerLink]="['/foods']">Platillos</a>
+    <a mat-button [routerLink]="['/foods/add']">Añadir platillo</a>
+    <a mat-button [routerLink]="['/menu']">Menúes</a>
+    <a mat-button [routerLink]="['/menu/add']">Añadir Menú</a>
+  </div>
+</mat-toolbar>

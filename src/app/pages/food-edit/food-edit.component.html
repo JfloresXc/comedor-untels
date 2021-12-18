@@ -1,8 +1,18 @@
-<div class="m-3">
-  <div class="col-lg-5 mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <app-form-food [idEdit]="id"></app-form-food>
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container mt-3">
+    <div class="row d-flex justify-content-around">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <app-form-food [idEdit]="id" [foodPreview]="food"></app-form-food>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <app-food-preview [food]="food" [isPreview]="true"></app-food-preview>
       </div>
     </div>
   </div>

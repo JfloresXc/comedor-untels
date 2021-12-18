@@ -1,0 +1,58 @@
+<div class="container my-3">
+  <div class="menu__date-group">
+    <div class="spacer"></div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Elige una fecha</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        class="text-light"
+        [(ngModel)]="date"
+        [disabled]="idEdit"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <form [formGroup]="formGroup" (ngSubmit)="addOrEditMenu()">
+    <mat-tab-group
+      mat-stretch-tabs
+      appearance="fill"
+      [selectedIndex]="selected.value"
+      (selectedIndexChange)="selected.setValue($event)"
+      class="menu__tab"
+    >
+      <mat-tab label="Desayuno">
+        <app-tab
+          [foodLista]="foodsOfDay.desayunoLista"
+          [option]="0"
+          (sendList)="setList($event, 0)"
+        ></app-tab>
+      </mat-tab>
+      <mat-tab label="Almuerzo">
+        <app-tab
+          [foodLista]="foodsOfDay.almuerzoLista"
+          [option]="1"
+          (sendList)="setList($event, 1)"
+        ></app-tab>
+      </mat-tab>
+      <mat-tab label="Cena">
+        <app-tab
+          [foodLista]="foodsOfDay.cenaLista"
+          [option]="2"
+          (sendList)="setList($event, 2)"
+        ></app-tab>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="menu__button-group">
+      <button mat-raised-button>
+        <mat-icon>{{ idEdit ? "edit" : "add" }}</mat-icon>
+        <p class="d-inline-block m-0 p-0">
+          {{ idEdit ? "Editar Menú" : "Añadir Menú" }}
+        </p>
+      </button>
+    </div>
+  </form>
+</div>

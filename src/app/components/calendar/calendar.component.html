@@ -1,0 +1,40 @@
+<div class="calendar">
+  <div class="d-flex justify-content-between my-4">
+    <button mat-raised-button (click)="changeMonth(-1)">
+      <mat-icon>navigate_before</mat-icon>
+      <span>Mes anterior</span>
+    </button>
+    <h1 class="text-light">
+      {{ this.month | uppercase }} - {{ this.year | uppercase }}
+    </h1>
+    <button mat-raised-button (click)="changeMonth(1)">
+      <span>Mes siguiente</span>
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+  <ul class="calendar_content">
+    <li
+      class="calendar__dayOfWeek"
+      class="text-light h5"
+      *ngFor="let nameDay of daysOfWeek"
+    >
+      {{ nameDay | slice: 0:3 }}
+    </li>
+    <a
+      class="calendar__day"
+      *ngFor="let date of daysOfMonth; let first = first"
+      [style.gridColumnStart]="first ? date?.indexWeek : 'auto'"
+      (click)="showMenu(date)"
+    >
+      <p class="calendar__numberDay">
+        {{ date.numberDay }}
+      </p>
+
+      <div *ngIf="date.menuStorage" class="calendar__info">
+        <p class="calendar__point" *ngIf="date.menuStorage.desayunoIds[0]">D</p>
+        <p class="calendar__point" *ngIf="date.menuStorage.almuerzoIds[0]">A</p>
+        <p class="calendar__point" *ngIf="date.menuStorage.cenaIds[0]">C</p>
+      </div>
+    </a>
+  </ul>
+</div>

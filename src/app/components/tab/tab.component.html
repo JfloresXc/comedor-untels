@@ -1,0 +1,78 @@
+<div class="menu__tab-item">
+  <div>
+    <mat-form-field appearance="fill" class="w-100 p-3">
+      <mat-label>Platillos</mat-label>
+      <input
+        type="text"
+        class="text-light"
+        placeholder="Busca alguno aquí"
+        aria-label="Number"
+        matInput
+        [formControl]="controlInputSearch"
+        (ngModelChange)="handleChangeFoods($event)"
+      />
+      <button
+        *ngIf="controlInputSearch.value"
+        style="color: whitesmoke"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="controlInputSearch.setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-selection-list
+      #listFoods
+      class="menu__list-checks"
+      [formControl]="control"
+    >
+      <mat-list-option
+        color="primary"
+        *ngFor="let food of foodsPreview"
+        [value]="{ id: food.id, nombre: food.nombre }"
+      >
+        {{ food.nombre }}
+      </mat-list-option>
+    </mat-selection-list>
+    <div class="menu__button-group">
+      <button
+        mat-raised-button
+        type="button"
+        color="accent"
+        (click)="addToList()"
+      >
+        <mat-icon>add</mat-icon>
+        <span>Añadir a desayuno</span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <h1 class="text-light mt-3">Lista de platillos</h1>
+    <p class="text-light">
+      Lista con platillos listos para ser almacenados en los menues diarios
+    </p>
+    <mat-list #listFoods class="menu__list-previews">
+      <mat-list-item *ngFor="let food of foodLista; let index = index">
+        <div class="w-100 d-flex justify-content-between">
+          <p>{{ food.nombre }}</p>
+          <div>
+            <button type="button" mat-mini-fab color="accent">
+              <mat-icon>preview</mat-icon>
+            </button>
+            <button
+              class="mx-3"
+              type="button"
+              mat-mini-fab
+              color="warn"
+              (click)="deleteFood(index)"
+            >
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

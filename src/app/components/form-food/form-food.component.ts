@@ -1,8 +1,14 @@
+import { ErrorService } from 'src/app/services/error/error.service';
+import { LoadingService } from 'src/app/services/loading/loading.service';
+import { FoodService } from 'src/app/services/food/food.service';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FoodsService } from 'src/app/services/foods.service';
+import { FormGroup } from '@angular/forms';
+import { FoodsService } from 'src/app/services/food/foods.service';
 import Food from 'src/app/models/food.model';
+import Utils from 'src/app/utils';
+import { ref, uploadBytes, getDownloadURL, getBlob } from 'firebase/storage';
+import { storage } from 'src/app/firebase';
 
 @Component({
   selector: 'app-form-food',
@@ -11,65 +17,106 @@ import Food from 'src/app/models/food.model';
 })
 export class FormFoodComponent implements OnInit {
   @Input() idEdit: any = null;
+  @Input() foodPreview: Food = new Food();
+  formGroup: FormGroup;
+  fileLocal: File = new File([], '');
   textButtonSubmit = 'Agregar';
-  form: FormGroup;
-  food: Food = new Food();
+  util: Utils = new Utils();
 
   constructor(
-    private _builder: FormBuilder,
     private foodsService: FoodsService,
+    private foodService: FoodService,
+    private loadingService: LoadingService,
+    private errorService: ErrorService,
     private router: Router
   ) {
-    this.form = this._builder.group({
-      nombre: ['', Validators.compose([Validators.required])],
-      precio: ['', Validators.compose([Validators.required])],
-      descripcion: ['', Validators.compose([Validators.required])],
-      // file: ['', Validators.compose([Validators.required])],
+    this.formGroup = this.util.getFoodFormFood();
+    this.util.getFileDefault().then((blob: any) => {
+      this.fileLocal = this.util.blobToFile({ theBlob: blob });
     });
   }
 
   ngOnInit(): void {
-    if (this.idEdit) {
-      this.foodsService.getFood(this.idEdit).subscribe((food) => {
-        const { nombre, descripcion, precio } = food.payload.data();
+    this.foodService.get$Food().subscribe((food) => {
+      if (this.idEdit) {
+        this.foodPreview = food;
+        const { nombre, precio, descripcion } = this.foodPreview;
+        this.formGroup.controls?.nombre.setValue(nombre);
+        this.formGroup.controls?.descripcion.setValue(descripcion);
+        this.formGroup.controls?.precio.setValue(precio);
+        this.textButtonSubmit = 'Editar';
+      }
+    });
 
-        this.form.controls?.nombre.setValue(nombre);
-        this.form.controls?.descripcion.setValue(descripcion);
-        this.form.controls?.precio.setValue(precio);
-      });
-      this.textButtonSubmit = 'Editar';
+    // this.foodsService.getFood(this.idEdit).subscribe((food) => {
+    //   this.foodPreview = {
+    //     ...this.foodPreview,
+    //     ...food.data(),
+    //     id: this.idEdit,
+    //   };
+    //   const { nombre, precio, descripcion } = this.foodPreview;
+    //   this.formGroup.controls?.nombre.setValue(nombre);
+    //   this.formGroup.controls?.descripcion.setValue(descripcion);
+    //   this.formGroup.controls?.precio.setValue(precio);
+    //   this.textButtonSubmit = 'Editar';
+    // });
+  }
+
+  async addOrEdit() {
+    this.loadingService.show();
+    try {
+      await this.router.navigate(['/foods']);
+      if (!this.idEdit) await this.addFood();
+      else await this.editFood();
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  addOrEdit() {
-    const { nombre, precio, descripcion } = this.form.value;
-    this.food = {
-      nombre,
-      precio,
-      fecha: new Date().toLocaleDateString(),
-      descripcion,
-      urlImagen: '',
+  async addFood() {
+    const fileRef = ref(storage, `menu/${this.fileLocal?.name}`);
+    await uploadBytes(fileRef, this.fileLocal);
+    this.foodPreview.nombreImagen = this.fileLocal.name;
+    this.foodPreview.urlImagen = await getDownloadURL(fileRef);
+    await this.foodsService.addFood({
+      ...this.foodPreview,
+    });
+  }
+
+  async editFood() {
+    await this.foodsService.updateFood(this.idEdit, {
+      ...this.foodPreview,
+    });
+  }
+
+  handleChange(detail: any) {
+    const { name, value } = detail;
+    switch (name) {
+      case 'nombre':
+        this.foodPreview.nombre = value;
+        break;
+      case 'descripcion':
+        this.foodPreview.descripcion = value;
+        break;
+      case 'precio':
+        this.foodPreview.precio = value;
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleChangeFile(event: any) {
+    const files = event.target.files;
+    const reader = new FileReader();
+
+    reader.onload = async (event: ProgressEvent) => {
+      this.foodPreview.urlImagen = (<FileReader>event.target).result;
+      this.fileLocal = files[0];
     };
 
-    if (!this.idEdit) {
-      this.foodsService
-        .addFood(this.food)
-        .then(() => {})
-        .catch((error) => console.error(error));
-    } else {
-      this.foodsService
-        .updateFood(this.idEdit, this.food)
-        .then(() => {
-          this.router.navigate(['/foods']);
-        })
-        .catch((error) => console.error(error));
+    if (files && files[0]) {
+      reader.readAsDataURL(event.target.files[0]);
     }
-
-    this.form.reset();
-    this.food = new Food();
-  }
-
-  handleChangeFile(e: any) {
-    console.log(e.target.files);
   }
 }

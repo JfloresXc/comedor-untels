@@ -1,29 +1,5 @@
 <div class="row">
-  <div class="col-lg-4" *ngFor="let food of foods">
-    <div class="card">
-      <div class="card-header text-center">
-        <h3>{{ food.nombre }}</h3>
-      </div>
-      <div class="card-body">
-        <ul class="list-group">
-          <li class="list-group-item"><b>Precio:</b> {{ food.precio }}</li>
-          <li class="list-group-item">
-            <b>Descripcion:</b> {{ food.descripcion }}
-          </li>
-        </ul>
-      </div>
-      <div class="card-footer">
-        <ul class="list-group">
-          <li class="list-group-item d-flex flex-row">
-            <button class="btn btn-success" (click)="redirectEdit(food.id)">
-              <span class="material-icons"> edit </span>
-            </button>
-            <button class="btn btn-danger" (click)="delete(food.id)">
-              <span class="material-icons"> delete </span>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="col-lg-3" *ngFor="let food of foods">
+    <app-food-preview [food]="food"></app-food-preview>
   </div>
 </div>

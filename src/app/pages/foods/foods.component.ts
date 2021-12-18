@@ -1,7 +1,8 @@
+import { LoadingService } from './../../services/loading/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { Observable } from 'rxjs';
-import { FoodsService } from 'src/app/services/foods.service';
+import { FoodsService } from 'src/app/services/food/foods.service';
 
 @Component({
   selector: 'app-foods',
@@ -10,9 +11,18 @@ import { FoodsService } from 'src/app/services/foods.service';
 })
 export class FoodsComponent implements OnInit {
   foods: Observable<any[]>;
-  constructor(private foodsService: FoodsService) {
-    this.foods = foodsService.getFoods;
+  isLoading: boolean = false;
+
+  constructor(
+    private foodsService: FoodsService,
+    private loadingService: LoadingService
+  ) {
+    this.foods = this.foodsService.foods$;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadingService.loading$.subscribe((isLoadingKey) => {
+      this.isLoading = isLoadingKey;
+    });
+  }
 }

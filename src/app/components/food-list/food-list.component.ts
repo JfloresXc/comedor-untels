@@ -1,33 +1,37 @@
-import { FoodsService } from 'src/app/services/foods.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading/loading.service';
+import { FoodsService } from 'src/app/services/food/foods.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-food-list',
   templateUrl: './food-list.component.html',
   styleUrls: ['./food-list.component.css'],
 })
-export class FoodListComponent implements OnInit {
+export class FoodListComponent implements OnInit, OnDestroy {
   foods: any[] = [];
-  constructor(private foodsService: FoodsService, private route: Router) {}
+  suscription: Subscription = new Subscription();
+
+  constructor(
+    private foodsService: FoodsService,
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
-    this.foodsService.getListFoods().subscribe((foodsKeys = []) => {
-      this.foods = [];
-      foodsKeys.forEach((key: any) => {
-        this.foods.push({
-          ...key.payload.doc.data(),
-          id: key.payload.doc.id,
-        });
-      });
+    // if (this.foodsService.foods.length === 0) {
+    //   Promise.resolve().then(() => {
+    //     this.loadingService.show();
+    //   });
+    // }
+
+    this.suscription = this.foodsService.foods$.subscribe((foodsKey) => {
+      this.foods = foodsKey;
+      // this.loadingService.hide();
     });
+    this.foods = this.foodsService.foods;
   }
 
-  delete(id: any) {
-    this.foodsService.deleteFood(id);
-  }
-
-  redirectEdit(id: any) {
-    this.route.navigate([`/food/${id}`]);
+  ngOnDestroy(): void {
+    this.suscription.unsubscribe();
   }
 }
