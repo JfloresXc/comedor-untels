@@ -1,0 +1,74 @@
+<mat-card>
+  <div class="gap-2 mb-3 text-center align-items-center justify-center">
+    <mat-card-title class="login__title h3 my-3"
+      >Paga con Tarjeta Visa o Mastercard
+    </mat-card-title>
+  </div>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field class="w-100 mb-3" appearance="fill" floatLabel="always">
+        <mat-label>Número de tarjeta</mat-label>
+        <input
+          matInput
+          type="number"
+          class="example-right-align"
+          formControlName="numeroTarjeta"
+          [errorStateMatcher]="matcher"
+          placeholder="Número de tarjeta"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="getForm.numeroTarjeta.hasError('required')">
+          El número de tarjeta es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="row mb-3">
+        <mat-form-field appearance="fill" class="col-sm-6">
+          <mat-label>Mes de vencimiento</mat-label>
+          <mat-select
+            formControlName="mesVencimiento"
+            [errorStateMatcher]="matcher"
+          >
+            <mat-option *ngFor="let index of mesesIndex" [value]="index + 1">{{
+              index + 1
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-sm-6">
+          <mat-label>Año de vencimiento</mat-label>
+          <mat-select
+            formControlName="añoVencimiento"
+            [errorStateMatcher]="matcher"
+          >
+            <mat-option *ngFor="let era of eras" [value]="era">{{
+              era
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-100 mb-3" appearance="fill" floatLabel="always">
+        <mat-label>CVV</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="codigoSeguridad"
+          [errorStateMatcher]="matcher"
+          placeholder="CVV"
+          autocomplete="off"
+        />
+        <mat-icon matSuffix>credit_card</mat-icon>
+        <mat-error *ngIf="getForm.numeroTarjeta.hasError('required')">
+          El código de seguridad es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        class="w-100 mb-3"
+        color="primary"
+        [disabled]="form.invalid"
+      >
+        Comprar
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

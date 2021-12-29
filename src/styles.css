@@ -18,7 +18,8 @@ h1 {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #303030;
+  /* background: #303030; */
+  background: var(--bs-dark);
 }
 
 li {
@@ -28,4 +29,24 @@ li {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+body::-webkit-scrollbar,
+.mat-table::-webkit-scrollbar,
+.mat-tab-group::-webkit-scrollbar,
+.mat-list::-webkit-scrollbar,
+.mat-dialog-container::-webkit-scrollbar,
+.mat-selection-list::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb,
+.mat-table::-webkit-scrollbar-thumb,
+.mat-tab-group::-webkit-scrollbar-thumb,
+.mat-list::-webkit-scrollbar-thumb,
+.mat-dialog-container::-webkit-scrollbar-thumb,
+.mat-selection-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: whitesmoke;
 }

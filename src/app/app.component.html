@@ -1,7 +1,8 @@
-<app-navbar></app-navbar>
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <app-navbar></app-navbar>
 
-<router-outlet>
-  <!-- <div *ngIf="!isError && isLoading">
-    <app-spinner></app-spinner>
-  </div> -->
-</router-outlet>
+  <router-outlet> </router-outlet>
+</div>

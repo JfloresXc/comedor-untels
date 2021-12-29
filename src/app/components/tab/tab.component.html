@@ -1,7 +1,7 @@
 <div class="menu__tab-item">
   <div>
     <mat-form-field appearance="fill" class="w-100 p-3">
-      <mat-label>Platillos</mat-label>
+      <mat-label>Buscar platillos</mat-label>
       <input
         type="text"
         class="text-light"
@@ -44,7 +44,7 @@
         (click)="addToList()"
       >
         <mat-icon>add</mat-icon>
-        <span>Añadir a desayuno</span>
+        <span>Añadir a lista previa</span>
       </button>
     </div>
   </div>
@@ -54,15 +54,22 @@
       Lista con platillos listos para ser almacenados en los menues diarios
     </p>
     <mat-list #listFoods class="menu__list-previews">
-      <mat-list-item *ngFor="let food of foodLista; let index = index">
-        <div class="w-100 d-flex justify-content-between">
+      <mat-list-item
+        *ngFor="let food of foodLista; let index = index"
+        class="mb-3"
+      >
+        <div class="w-100 menu__list-previews-item">
           <p>{{ food.nombre }}</p>
-          <div>
-            <button type="button" mat-mini-fab color="accent">
+          <div class="menu__list-buttons">
+            <button
+              mat-mini-fab
+              type="button"
+              color="accent"
+              (click)="openDialog(food)"
+            >
               <mat-icon>preview</mat-icon>
             </button>
             <button
-              class="mx-3"
               type="button"
               mat-mini-fab
               color="warn"

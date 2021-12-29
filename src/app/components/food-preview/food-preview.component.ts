@@ -1,11 +1,12 @@
 import { FoodService } from 'src/app/services/food/food.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Food from 'src/app/models/food.model';
 import { FoodsService } from 'src/app/services/food/foods.service';
 import { deleteObject, ref } from 'firebase/storage';
 import { storage } from 'src/app/firebase';
 import { LoadingService } from 'src/app/services/loading/loading.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-food-preview',
@@ -18,12 +19,12 @@ export class FoodPreviewComponent implements OnInit {
 
   constructor(
     private foodsService: FoodsService,
-    private foodService: FoodService,
     private loadingService: LoadingService,
-    private route: Router
+    private route: Router,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   async delete(food: Food) {
     this.loadingService.show();

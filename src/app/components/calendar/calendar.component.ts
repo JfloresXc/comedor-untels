@@ -13,7 +13,7 @@ import { Moment } from 'moment';
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
-  @Input() menus: Menu[] = [];
+  menus: Menu[] = [];
   month: string = '';
   year: string = '';
   daysOfMonth: any[] = [];
@@ -37,11 +37,6 @@ export class CalendarComponent implements OnInit {
 
     const monthNow = moment().month() + 1;
     const yearNow = moment().year();
-
-    // this.menusService.menus$.subscribe((menusKey) => {
-    //   this.menus = menusKey;
-    //   this.getDaysOfMonth(monthNow, yearNow);
-    // });
 
     this.menus = this.menusService.menus;
     this.getDaysOfMonth(monthNow, yearNow);

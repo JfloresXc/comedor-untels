@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import Food from 'src/app/models/food.model';
-import Menu from 'src/app/models/menu.model';
+import { CardPreviewComponent } from '../card-preview/card-preview.component';
+import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { FoodsService } from 'src/app/services/food/foods.service';
-import { LoadingService } from 'src/app/services/loading/loading.service';
-import { MenuService } from 'src/app/services/menu/menu.service';
+import { FoodService } from 'src/app/services/food/food.service';
 
 @Component({
   selector: 'app-tab',
@@ -13,37 +13,26 @@ import { MenuService } from 'src/app/services/menu/menu.service';
   styleUrls: ['./tab.component.css'],
 })
 export class TabComponent implements OnInit {
-  foods: any[] = [];
   @Input() option: number = 0;
   @Input() foodLista: any[] = [{ nombre: '', id: '' }];
   @Input() control = new FormControl();
   @Output() propagar = new EventEmitter<string>();
   @Output() sendList = new EventEmitter<any[]>();
+  foods: any[] = [];
   foodsPreview: any[] = [];
   controlInputSearch = new FormControl();
-  mensaje: string = '';
 
   constructor(
     private foodsService: FoodsService,
-    private menuService: MenuService,
-    private loadingService: LoadingService,
-    private alertService: AlertService
+    private foodService: FoodService,
+    private alertService: AlertService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.foodsService.foods$.subscribe((foodsKey) => {
       this.foods = foodsKey;
       this.foodsPreview = foodsKey;
-    });
-    this.menuService.menu$.subscribe((menuKey: Menu) => {
-      const { desayunoIds, almuerzoIds, cenaIds } = menuKey;
-      // if (this.option === 0) {
-      //   this.foodLista = desayunoIds;
-      // } else if (this.option === 1) {
-      //   this.foodLista = almuerzoIds;
-      // } else if (this.option === 2) {
-      //   this.foodLista = cenaIds;
-      // }
     });
 
     this.foods = this.foodsService.foods;
@@ -86,5 +75,20 @@ export class TabComponent implements OnInit {
   addItems() {
     this.foodLista.push(...this.control.value);
     this.clear();
+  }
+
+  openDialog(food: any) {
+    const dialogRef = this.dialog.open(CardPreviewComponent);
+    this.showFood(food);
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  showFood(food: any) {
+    this.foodsService.getFood(food.id).subscribe((foodKey: any) => {
+      if (foodKey.data()) {
+        this.foodService.suscribeFood(foodKey.data());
+      }
+    });
   }
 }

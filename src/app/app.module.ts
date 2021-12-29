@@ -26,6 +26,20 @@ import { MenuEditComponent } from './pages/menu-edit/menu-edit.component';
 import { TabComponent } from './components/tab/tab.component';
 import { MenuAddComponent } from './pages/menu-add/menu-add.component';
 import { MenuFormComponent } from './components/menu-form/menu-form.component';
+import { CardPreviewComponent } from './components/card-preview/card-preview.component';
+import { MenuWeekComponent } from './components/menu-week/menu-week.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { HeroComponent } from './components/hero/hero.component';
+import { ActivatedRouteSnapshot } from '@angular/router';
+import { UserRegistersComponent } from './pages/user-registers/user-registers.component';
+import { UserCartComponent } from './pages/user-cart/user-cart.component';
+import { TableCartListComponent } from './components/table-cart-list/table-cart-list.component';
+import { BuyComponent } from './pages/buy/buy.component';
+import { CreditcardFormComponent } from './components/creditcard-form/creditcard-form.component';
+import { InfoHeroComponent } from './components/info-hero/info-hero.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +61,19 @@ import { MenuFormComponent } from './components/menu-form/menu-form.component';
     TabComponent,
     MenuAddComponent,
     MenuFormComponent,
+    CardPreviewComponent,
+    MenuWeekComponent,
+    LoginComponent,
+    SignupComponent,
+    HomeComponent,
+    RegisterComponent,
+    HeroComponent,
+    UserRegistersComponent,
+    UserCartComponent,
+    TableCartListComponent,
+    BuyComponent,
+    CreditcardFormComponent,
+    InfoHeroComponent,
   ],
   imports: [
     BrowserModule,

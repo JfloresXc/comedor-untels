@@ -2,6 +2,8 @@ import { LoadingService } from 'src/app/services/loading/loading.service';
 import { FoodsService } from 'src/app/services/food/foods.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import Food from 'src/app/models/food.model';
 
 @Component({
   selector: 'app-food-list',
@@ -10,6 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class FoodListComponent implements OnInit, OnDestroy {
   foods: any[] = [];
+  foodsPreview: any[] = [];
+  controlInputSearch = new FormControl();
   suscription: Subscription = new Subscription();
 
   constructor(
@@ -18,20 +22,22 @@ export class FoodListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // if (this.foodsService.foods.length === 0) {
-    //   Promise.resolve().then(() => {
-    //     this.loadingService.show();
-    //   });
-    // }
-
     this.suscription = this.foodsService.foods$.subscribe((foodsKey) => {
       this.foods = foodsKey;
-      // this.loadingService.hide();
+      this.foodsPreview = foodsKey;
     });
     this.foods = this.foodsService.foods;
+    this.foodsPreview = this.foodsService.foods;
   }
 
   ngOnDestroy(): void {
     this.suscription.unsubscribe();
   }
+
+  handleChangeFoods(value: any) {
+    this.foodsPreview = this.foods.filter((food: Food) =>
+      food.nombre.toLowerCase().includes(value)
+    );
+  }
+
 }

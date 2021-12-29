@@ -1,0 +1,52 @@
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.menu-week {
+  min-height: 90vh;
+}
+
+.menu-week__list-item {
+  display: flex;
+}
+
+.menu-week__list-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-week__icon {
+  display: none;
+}
+
+.menu-week__list-item:hover .menu-week__icon {
+  display: inline-block;
+}
+
+.menu-week__title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  padding-bottom: 10px;
+  font-size: 50px;
+  line-height: 70px;
+}
+
+.menu-week__icon-title {
+  font-size: 40px;
+  height: 30px;
+}

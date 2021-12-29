@@ -1,50 +1,30 @@
-<!-- <div class="card mb-3">
-  <div class="card-header text-center">
-    <h1 class="h1">{{ food.nombre }}</h1>
-  </div>
-  <div class="card-body">
-    <ul class="list-group">
-      <li class="list-group-item"><b>Precio:</b> S/{{ food.precio }}</li>
-      <li class="list-group-item">
-        <b>Descripción:</b> {{ food.descripcion }}
-      </li>
-      <li class="list-group-item">
-        <img [src]="food.urlImagen" alt="" class="card-img-bottom" />
-      </li>
-    </ul>
-  </div>
-  <div class="card-footer" *ngIf="!isPreview">
-    <ul class="list-group">
-      <li class="list-group-item d-flex flex-row">
-        <button class="btn btn-success" (click)="redirectEdit(food.id)">
-          <span class="material-icons"> edit </span>
-        </button>
-        <button class="btn btn-danger" (click)="delete(food)">
-          <span class="material-icons"> delete </span>
-        </button>
-      </li>
-    </ul>
-  </div>
-</div> -->
-
 <mat-card class="mb-3">
-  <mat-card-title>{{ food.nombre }}</mat-card-title>
   <img
     mat-card-image
     [src]="food.urlImagen"
-    alt="food.descripcion"
+    alt="{{ food.descripcion }}"
     class="card-img-bottom"
+    *ngIf="food.urlImagen"
   />
-  <mat-card-content>
-    <p><b>Precio:</b> S/{{ food.precio }}</p>
-    <p><b>Descripción:</b> {{ food.descripcion }}</p>
+  <mat-card-title
+    ><h1 class="food__title">{{ food.nombre }}</h1></mat-card-title
+  >
+  <mat-card-content class="food__info">
+    <p class="text-secondary">Por Untels Comedor</p>
+    <p class="food__price">S/ {{ food.precio }}</p>
+    <p class="food__description">{{ food.descripcion }}</p>
   </mat-card-content>
-  <mat-card-actions *ngIf="!isPreview">
-    <button mat-button (click)="redirectEdit(food.id)">
-      <span class="material-icons"> edit </span>
+  <mat-card-actions *ngIf="!isPreview" class="d-flex justify-content-end">
+    <button
+      mat-mini-fab
+      color="accent"
+      class="m-2"
+      (click)="redirectEdit(food.id)"
+    >
+      <mat-icon>edit</mat-icon>
     </button>
-    <button mat-button (click)="delete(food)">
-      <span class="material-icons"> delete </span>
+    <button mat-mini-fab color="warn" class="m-2" (click)="delete(food)">
+      <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

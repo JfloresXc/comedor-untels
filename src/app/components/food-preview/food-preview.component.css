@@ -1,0 +1,14 @@
+.food__title {
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 500;
+}
+
+.food__info {
+  line-height: 17px;
+}
+
+.food__price {
+  font-size: 18px;
+  color: var(--bs-danger);
+}

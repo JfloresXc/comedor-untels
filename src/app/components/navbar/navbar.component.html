@@ -1,39 +1,157 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a [routerLink]="['/foods']" class="navbar-brand">FOODS</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-      <a [routerLink]="['/foods/add']" class="btn btn-outline-success"
-        >Add Food</a
-      >
-      <a [routerLink]="['/menu']" class="btn btn-outline-success">Menu</a>
-      <a [routerLink]="['/menu/edit']" class="btn btn-outline-success"
-        >Menu edit</a
-      >
-      <button class="btn btn-outline-primary">Logout</button>
+<div class="navbar">
+  <mat-toolbar color="primary" class="navbar__full">
+    <div class="container d-flex">
+      <a mat-menu-item class="navbar__title" [routerLink]="['/']">
+        <span> Comedor UNTELS </span>
+      </a>
+      <span class="navbar-spacer"></span>
+      <div class="navbar__links" *ngIf="!isLogged">
+        <a mat-button [routerLink]="['/login']">
+          <mat-icon>login</mat-icon>
+          <span class="mx-1">Iniciar Sesión</span>
+        </a>
+      </div>
+      <div class="navbar__links">
+        <button
+          mat-button
+          [routerLink]="['/shopping-cart']"
+          *ngIf="isLogged && validateNav(['usuario'])"
+        >
+          <mat-icon>shopping_cart</mat-icon>
+          <span class="mx-1">Carrito de compras</span>
+        </button>
+        <button
+          mat-button
+          [routerLink]="['/registers']"
+          *ngIf="isLogged && validateNav(['usuario'])"
+        >
+          <mat-icon>app_registration</mat-icon>
+          <span class="mx-1">Registros</span>
+        </button>
+        <button
+          mat-button
+          [matMenuTriggerFor]="users"
+          *ngIf="isLogged && validateNav(['administrador'])"
+        >
+          <mat-icon>people_outline</mat-icon>
+          <span class="mx-1">Usuarios</span>
+        </button>
+        <button
+          mat-button
+          [matMenuTriggerFor]="foods"
+          *ngIf="isLogged && validateNav(['administrador'])"
+        >
+          <mat-icon>dinner_dining</mat-icon>
+          <span class="mx-1">Platillos</span>
+        </button>
+        <button
+          mat-button
+          [matMenuTriggerFor]="menus"
+          *ngIf="isLogged && validateNav(['administrador'])"
+        >
+          <mat-icon>menu_book</mat-icon>
+          <span class="mx-1">Menúes</span>
+        </button>
+        <button
+          mat-button
+          (click)="logout()"
+          *ngIf="isLogged && validateNav(['administrador', 'usuario'])"
+        >
+          <mat-icon> logout</mat-icon>
+          <span class="mx-1">Logout</span>
+        </button>
+      </div>
     </div>
-  </div>
-</nav> -->
 
-<mat-toolbar color="primary" class="navbar">
-  <div class="container">
-    <span>Comedor Untels</span>
-    <span class="example-spacer"></span>
-    <a href=""></a>
-    <a mat-button [routerLink]="['/foods']">Platillos</a>
-    <a mat-button [routerLink]="['/foods/add']">Añadir platillo</a>
-    <a mat-button [routerLink]="['/menu']">Menúes</a>
-    <a mat-button [routerLink]="['/menu/add']">Añadir Menú</a>
-  </div>
-</mat-toolbar>
+    <div>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="navbar__button-toggle"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <!-- MATMENUS -->
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item [routerLink]="['/login']" *ngIf="!isLogged">
+        <mat-icon>login</mat-icon>
+        <span class="mx-1">Iniciar Sesión</span>
+      </a>
+      <a
+        mat-menu-item
+        [routerLink]="['/shopping-cart']"
+        *ngIf="isLogged && validateNav(['usuario'])"
+      >
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="mx-1">Carrito de compras</span>
+      </a>
+      <a
+        mat-menu-item
+        [routerLink]="['/registers']"
+        *ngIf="isLogged && validateNav(['usuario'])"
+      >
+        <mat-icon>app_registration</mat-icon>
+        <span class="mx-1">Registros</span>
+      </a>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="users"
+        *ngIf="isLogged && validateNav(['administrador'])"
+      >
+        <mat-icon>people_outline</mat-icon>
+        <span class="mx-1">Usuarios</span>
+      </button>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="foods"
+        *ngIf="isLogged && validateNav(['administrador'])"
+      >
+        <mat-icon>dinner_dining</mat-icon>
+        <span class="mx-1">Platillos</span>
+      </button>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="menus"
+        *ngIf="isLogged && validateNav(['administrador'])"
+      >
+        <mat-icon>menu_book</mat-icon>
+        <span class="mx-1">Menúes</span>
+      </button>
+      <button mat-menu-item (click)="logout()" *ngIf="isLogged">
+        <mat-icon> logout</mat-icon>
+        <span class="mx-1">Logout</span>
+      </button>
+    </mat-menu>
+
+    <mat-menu #users="matMenu">
+      <a mat-menu-item [routerLink]="['/register']">
+        <mat-icon>app_registration</mat-icon>
+        <span class="mx-1">Registrar</span>
+      </a>
+    </mat-menu>
+
+    <mat-menu #foods="matMenu">
+      <a mat-menu-item [routerLink]="['/foods']">
+        <mat-icon> kitchen</mat-icon>
+        <span>Lista de platillos</span>
+      </a>
+      <a mat-menu-item [routerLink]="['/foods/add']">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Añadir platillo</span>
+      </a>
+    </mat-menu>
+
+    <mat-menu #menus="matMenu">
+      <a mat-menu-item [routerLink]="['/menu']">
+        <mat-icon>menu_book</mat-icon>
+        <span>Lista de menúes</span>
+      </a>
+      <a mat-menu-item [routerLink]="['/menu/add']">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Añadir Menú</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+</div>

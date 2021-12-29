@@ -26,7 +26,6 @@ export class MenuEditComponent implements OnInit {
     private foodsService: FoodsService,
     private menuService: MenuService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
   ) {
     this.idEdit = this.activatedRoute.snapshot.paramMap.get('id');
   }
@@ -38,19 +37,7 @@ export class MenuEditComponent implements OnInit {
       this.isLoading = isLoadingKey;
     });
 
-    this.menuService.getMenu(this.idEdit).subscribe((menuKey: any) => {
-      if (menuKey.data()) {
-        this.menu = {
-          ...this.menu,
-          ...menuKey.data(),
-          id: this.idEdit,
-        };
-        this.menuService.menu$.next(this.menu);
-        this.loadingService.hide();
-      } else {
-        this.router.navigate(['/menu']);
-      }
-    });
+    this.menuService.getMenu(this.idEdit)
   }
 
   ngOnDestroy(): void {}

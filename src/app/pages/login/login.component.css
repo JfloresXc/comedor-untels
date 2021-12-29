@@ -1,0 +1,25 @@
+.login__group-title {
+  display: grid;
+  grid-template-areas:
+    "brand title"
+    "brand description";
+  padding: 10px 0;
+}
+
+.login__brand {
+  grid-area: brand;
+  font-size: 70px;
+  width: 100%;
+  padding: 0 0.4em;
+  height: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+.login__title {
+  grid-area: title;
+}
+
+.login__description {
+  grid-area: description;
+}

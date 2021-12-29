@@ -1,11 +1,45 @@
+.navbar__button-toggle {
+  display: none;
+}
+
 .navbar {
+  display: flex;
+  padding: 0;
+}
+
+.navbar__full {
   padding: auto 5em;
 }
 
-.example-spacer {
+.navbar__links {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.navbar__title {
+  font-size: 20px;
+}
+
+.navbar-spacer {
   flex: 1 1 auto;
 }
 
 a:hover {
   color: whitesmoke;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+@media screen and (max-width: 760px) {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__button-toggle,
+  .navbar__sidenav {
+    display: inline-block;
+  }
 }

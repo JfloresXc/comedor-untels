@@ -28,6 +28,7 @@ export class FoodsService {
             id: key.payload.doc.id,
           });
         });
+
         this.foods$.next(this.foods);
         this.loadingService.hide();
       });

@@ -1,0 +1,39 @@
+.info-hero {
+  min-height: 90vh;
+  background: var(--bs-indigo);
+}
+
+.info-title {
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 50px;
+  line-height: 50px;
+}
+
+.info__icon {
+  font-size: 40px;
+  height: 30px;
+}
+
+.info_body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.info__description {
+  font-size: 20px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 200;
+  line-height: 25px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.info__image {
+  width: 300px;
+  height: 300px;
+}

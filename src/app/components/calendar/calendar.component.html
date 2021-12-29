@@ -13,27 +13,19 @@
     </button>
   </div>
   <ul class="calendar_content">
-    <li
-      class="calendar__dayOfWeek"
-      class="text-light h5"
-      *ngFor="let nameDay of daysOfWeek"
-    >
+    <li class="calendar__dayOfWeek" class="text-light h5" *ngFor="let nameDay of daysOfWeek">
       {{ nameDay | slice: 0:3 }}
     </li>
-    <a
-      class="calendar__day"
-      *ngFor="let date of daysOfMonth; let first = first"
-      [style.gridColumnStart]="first ? date?.indexWeek : 'auto'"
-      (click)="showMenu(date)"
-    >
+    <a class="calendar__day" *ngFor="let date of daysOfMonth; let first = first"
+      [style.gridColumnStart]="first ? date?.indexWeek : 'auto'" (click)="showMenu(date)">
       <p class="calendar__numberDay">
         {{ date.numberDay }}
       </p>
 
       <div *ngIf="date.menuStorage" class="calendar__info">
-        <p class="calendar__point" *ngIf="date.menuStorage.desayunoIds[0]">D</p>
-        <p class="calendar__point" *ngIf="date.menuStorage.almuerzoIds[0]">A</p>
-        <p class="calendar__point" *ngIf="date.menuStorage.cenaIds[0]">C</p>
+        <p class="calendar__point" *ngIf="date.menuStorage">
+          <mat-icon>check_circle_outline</mat-icon>
+        </p>
       </div>
     </a>
   </ul>

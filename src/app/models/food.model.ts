@@ -6,13 +6,4 @@ export default class Food {
   fecha: string = new Date().toLocaleDateString();
   urlImagen: any = '';
   nombreImagen: string = '';
-
-  // constructor() {
-  //   this.nombre = '';
-  //   this.precio = 0;
-  //   this.descripcion = '';
-  //   this.fecha = '';
-  //   this.urlImagen = '';
-  // }
-  // constructor() {}
 }

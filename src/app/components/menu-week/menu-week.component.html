@@ -1,0 +1,66 @@
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="menu-week container mt-3 text-center">
+    <h1 class="menu-week__title text-light">MENÚ SEMANAL</h1>
+    <mat-icon class="text-light menu-week__icon-title">tonality</mat-icon>
+    <div class="container py-3 text-center">
+      <div class="row">
+        <mat-tab-group
+          mat-align-tabs="end"
+          [selectedIndex]="selected.value"
+          (selectedIndexChange)="showMenu($event)"
+        >
+          <mat-tab [label]="getTextDay(menu.fecha)" *ngFor="let menu of menus">
+            <mat-accordion class="example-headers-align my-3" multi>
+              <mat-expansion-panel *ngFor="let numberList of foodsList">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="py-2">
+                    {{ textList[numberList] }}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{ getFoodList(numberList).length }} platillos
+                    <button
+                      mat-mini-fab
+                      color="primary"
+                      (click)="addFoodListToCart(menu, numberList)"
+                    >
+                      <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-selection-list [multiple]="false">
+                  <mat-list-option
+                    *ngFor="let food of getFoodList(numberList)"
+                    class="menu-week__list-item"
+                    (click)="openDialog(food)"
+                  >
+                    <div class="w-100 menu-week__list-option">
+                      <span>{{ food.nombre }}</span>
+                      <button
+                        mat-mini-fab
+                        color="accent"
+                        class="menu-week__icon"
+                      >
+                        <mat-icon>preview</mat-icon>
+                      </button>
+                    </div>
+                  </mat-list-option>
+                </mat-selection-list>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path
+      fill="#6610f2"
+      fill-opacity="1"
+      d="M0,160L6.7,160C13.3,160,27,160,40,149.3C53.3,139,67,117,80,128C93.3,139,107,181,120,192C133.3,203,147,181,160,149.3C173.3,117,187,75,200,53.3C213.3,32,227,32,240,74.7C253.3,117,267,203,280,213.3C293.3,224,307,160,320,122.7C333.3,85,347,75,360,64C373.3,53,387,43,400,64C413.3,85,427,139,440,181.3C453.3,224,467,256,480,272C493.3,288,507,288,520,245.3C533.3,203,547,117,560,85.3C573.3,53,587,75,600,80C613.3,85,627,75,640,64C653.3,53,667,43,680,80C693.3,117,707,203,720,240C733.3,277,747,267,760,261.3C773.3,256,787,256,800,224C813.3,192,827,128,840,128C853.3,128,867,192,880,229.3C893.3,267,907,277,920,245.3C933.3,213,947,139,960,122.7C973.3,107,987,149,1000,165.3C1013.3,181,1027,171,1040,154.7C1053.3,139,1067,117,1080,138.7C1093.3,160,1107,224,1120,250.7C1133.3,277,1147,267,1160,261.3C1173.3,256,1187,256,1200,224C1213.3,192,1227,128,1240,101.3C1253.3,75,1267,85,1280,122.7C1293.3,160,1307,224,1320,245.3C1333.3,267,1347,245,1360,213.3C1373.3,181,1387,139,1400,128C1413.3,117,1427,139,1433,149.3L1440,160L1440,320L1433.3,320C1426.7,320,1413,320,1400,320C1386.7,320,1373,320,1360,320C1346.7,320,1333,320,1320,320C1306.7,320,1293,320,1280,320C1266.7,320,1253,320,1240,320C1226.7,320,1213,320,1200,320C1186.7,320,1173,320,1160,320C1146.7,320,1133,320,1120,320C1106.7,320,1093,320,1080,320C1066.7,320,1053,320,1040,320C1026.7,320,1013,320,1000,320C986.7,320,973,320,960,320C946.7,320,933,320,920,320C906.7,320,893,320,880,320C866.7,320,853,320,840,320C826.7,320,813,320,800,320C786.7,320,773,320,760,320C746.7,320,733,320,720,320C706.7,320,693,320,680,320C666.7,320,653,320,640,320C626.7,320,613,320,600,320C586.7,320,573,320,560,320C546.7,320,533,320,520,320C506.7,320,493,320,480,320C466.7,320,453,320,440,320C426.7,320,413,320,400,320C386.7,320,373,320,360,320C346.7,320,333,320,320,320C306.7,320,293,320,280,320C266.7,320,253,320,240,320C226.7,320,213,320,200,320C186.7,320,173,320,160,320C146.7,320,133,320,120,320C106.7,320,93,320,80,320C66.7,320,53,320,40,320C26.7,320,13,320,7,320L0,320Z"
+    ></path>
+  </svg>
+</div>

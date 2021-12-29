@@ -1,7 +1,7 @@
 export default class Menu {
-  id: string = '-1';
+  id: string = '';
   fecha: string = '';
-  desayunoIds: any[] = [{ nombre: '', id: '' }];
-  almuerzoIds: any[] = [{ nombre: '', id: '' }];
-  cenaIds: any[] = [{ nombre: '', id: '' }];
+  idDesayunos: string = '';
+  idAlmuerzos: string = '';
+  idCenas: string = '';
 }

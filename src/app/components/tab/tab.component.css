@@ -1,22 +1,30 @@
-.menu_tab {
-  min-height: 400px;
-}
-
 .menu__tab-item {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.625em;
-  min-height: 350px;
+  padding-bottom: 10px;
+  min-height: 460px;
 }
 
 .menu__list-checks {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
 .menu__list-previews {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
+}
+
+.menu__list-previews-item{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.menu__list-buttons{
+  display: flex;
+  gap: 10px;
 }
 
 .menu__button-group {
