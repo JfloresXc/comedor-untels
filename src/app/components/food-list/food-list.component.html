@@ -1,32 +1,32 @@
-<h1 class="text-light text-center food-list__title pt-3">
-  Platillos untelsinos
-</h1>
-<div class="w-100 d-flex justify-content-center">
-  <mat-form-field appearance="fill" class="food-list__input-search">
-    <mat-label class="text-center">Buscar platillo </mat-label>
-    <input
-      type="text"
-      class="text-light"
-      placeholder="Busca alguno aquí"
-      aria-label="Number"
-      matInput
-      [formControl]="controlInputSearch"
-      (ngModelChange)="handleChangeFoods($event)"
-    />
-    <button
-      *ngIf="controlInputSearch.value"
-      style="color: whitesmoke"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="controlInputSearch.setValue('')"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-</div>
-<div class="row">
-  <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let food of foodsPreview">
-    <app-food-preview [food]="food"></app-food-preview>
+<div class="food-list">
+  <h1 class="text-light text-center food-list__title">Platillos</h1>
+  <div class="w-100 d-flex justify-content-center">
+    <mat-form-field appearance="fill" class="food-list__input-search">
+      <mat-label class="text-center">Buscar platillo </mat-label>
+      <input
+        type="text"
+        class="text-light"
+        placeholder="Busca alguno aquí"
+        aria-label="Number"
+        matInput
+        [formControl]="controlInputSearch"
+        (ngModelChange)="handleChangeFoods($event)"
+      />
+      <button
+        *ngIf="controlInputSearch.value"
+        style="color: whitesmoke"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="controlInputSearch.setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let food of foodsPreview">
+      <app-food-preview [food]="food"></app-food-preview>
+    </div>
   </div>
 </div>

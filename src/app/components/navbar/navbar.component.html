@@ -1,14 +1,15 @@
 <div class="navbar">
-  <mat-toolbar color="primary" class="navbar__full">
+  <mat-toolbar class="navbar__full">
     <div class="container d-flex">
-      <a mat-menu-item class="navbar__title" [routerLink]="['/']">
-        <span> Comedor UNTELS </span>
+      <a mat-menu-item [routerLink]="['/']" class="navbar__title">
+        <div class="navbar__title-icon">🍽</div>
+        <span class="text-light"> Comedor Untels</span>
       </a>
       <span class="navbar-spacer"></span>
       <div class="navbar__links" *ngIf="!isLogged">
         <a mat-button [routerLink]="['/login']">
           <mat-icon>login</mat-icon>
-          <span class="mx-1">Iniciar Sesión</span>
+          <span class="m-1">Iniciar Sesión</span>
         </a>
       </div>
       <div class="navbar__links">

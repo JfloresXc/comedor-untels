@@ -40,6 +40,8 @@ import { TableCartListComponent } from './components/table-cart-list/table-cart-
 import { BuyComponent } from './pages/buy/buy.component';
 import { CreditcardFormComponent } from './components/creditcard-form/creditcard-form.component';
 import { InfoHeroComponent } from './components/info-hero/info-hero.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ForgottenComponent } from './pages/forgotten/forgotten.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { InfoHeroComponent } from './components/info-hero/info-hero.component';
     BuyComponent,
     CreditcardFormComponent,
     InfoHeroComponent,
+    FooterComponent,
+    ForgottenComponent,
   ],
   imports: [
     BrowserModule,

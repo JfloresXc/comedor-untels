@@ -1,16 +1,26 @@
+.table-cart {
+  --font-text: 16px;
+}
+
 .table {
   max-height: 900px;
 }
 
 .table-cart-list__title {
   text-align: center;
-  font-family: "Oswald", sans-serif;
-  padding-bottom: 10px;
-  font-size: 50px;
-  line-height: 70px;
+  font-size: calc(var(--font-text) * 3);
+  width: 100%;
+  margin: 4em 0 1em 0;
 }
 
 .table-cart-list__icon-title {
   font-size: 40px;
   height: 30px;
+}
+
+/* -------------- MEDIAQUERIES */
+@media screen and (max-width: 600px) {
+  .table-cart {
+    --font-text: 12px;
+  }
 }

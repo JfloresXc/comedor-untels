@@ -1,4 +1,3 @@
-import { LoadingService } from 'src/app/services/loading/loading.service';
 import { Component, OnInit } from '@angular/core';
 import Food from 'src/app/models/food.model';
 

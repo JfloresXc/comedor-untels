@@ -20,11 +20,10 @@ export class FoodPreviewComponent implements OnInit {
   constructor(
     private foodsService: FoodsService,
     private loadingService: LoadingService,
-    private route: Router,
+    private route: Router
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   async delete(food: Food) {
     this.loadingService.show();

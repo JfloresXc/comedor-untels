@@ -9,6 +9,7 @@ import { FoodAddComponent } from './pages/food-add/food-add.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { MenuEditComponent } from './pages/menu-edit/menu-edit.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ForgottenComponent } from './pages/forgotten/forgotten.component';
 
 import { CheckLoginGuard } from './guards/check-login.guard';
 import { HomeComponent } from './pages/home/home.component';
@@ -23,6 +24,12 @@ const appRoutes: Routes = [
     component: InitialComponent,
     pathMatch: 'full',
   },
+  {
+    path: 'forgotten',
+    component: ForgottenComponent,
+    pathMatch: 'full',
+  },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   {
     path: 'foods',
     component: FoodsComponent,
@@ -46,6 +53,9 @@ const appRoutes: Routes = [
     component: FoodEditComponent,
     pathMatch: 'full',
     canActivate: [CheckLoginGuard],
+    data: {
+      roles: ['administrador'],
+    },
   },
   {
     path: 'menu',
@@ -74,7 +84,6 @@ const appRoutes: Routes = [
       roles: ['administrador'],
     },
   },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   {
     path: 'register',
     component: RegisterComponent,
