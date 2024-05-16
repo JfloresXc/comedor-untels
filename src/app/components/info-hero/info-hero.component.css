@@ -1,7 +1,7 @@
 .info-hero {
   --font-text: 16px;
 
-  background: var(--bs-yellow);
+  background: #253545;
   display: flex;
   justify-content: center;
   border-radius: 5px;

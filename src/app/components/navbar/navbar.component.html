@@ -51,7 +51,7 @@
           *ngIf="isLogged && validateNav(['administrador'])"
         >
           <mat-icon>menu_book</mat-icon>
-          <span class="mx-1">Menúes</span>
+          <span class="mx-1">Ver Menú</span>
         </button>
         <button
           mat-button
@@ -118,7 +118,7 @@
         *ngIf="isLogged && validateNav(['administrador'])"
       >
         <mat-icon>menu_book</mat-icon>
-        <span class="mx-1">Menúes</span>
+        <span class="mx-1">Ver Menú</span>
       </button>
       <button mat-menu-item (click)="logout()" *ngIf="isLogged">
         <mat-icon> logout</mat-icon>
@@ -147,7 +147,7 @@
     <mat-menu #menus="matMenu">
       <a mat-menu-item [routerLink]="['/menu']">
         <mat-icon>menu_book</mat-icon>
-        <span>Lista de menúes</span>
+        <span>Lista del Menú</span>
       </a>
       <a mat-menu-item [routerLink]="['/menu/add']">
         <mat-icon>add_circle_outline</mat-icon>
