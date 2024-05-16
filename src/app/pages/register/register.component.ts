@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
   });
   matcher = new MyErrorStateMatcher();
   hide = true;
+  showEmailError = false;
+  showPasswordError = false;
 
   constructor(private authService: AuthService) {}
 
@@ -26,6 +28,25 @@ export class RegisterComponent implements OnInit {
 
   getForm() {
     return this.form.controls;
+  }
+
+  handleFocusOut(controlName: string) {
+    const control = this.getForm()[controlName];
+
+    if (control.invalid) {
+      if (controlName === 'email' && control.hasError('required')) {
+        this.showEmailError = true;
+        setTimeout(() => {
+          this.showEmailError = false;
+        }, 3000);
+      }
+      if (controlName === 'password' && control.hasError('required')) {
+        this.showPasswordError = true;
+        setTimeout(() => {
+          this.showPasswordError = false;
+        }, 3000);
+      }
+    }
   }
 
   submit() {

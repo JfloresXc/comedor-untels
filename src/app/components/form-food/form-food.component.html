@@ -1,41 +1,46 @@
-<form [formGroup]="formGroup" (ngSubmit)="addOrEdit()">
-  <div class="mb-3">
-    <input
-      type="text"
-      formControlName="nombre"
-      class="form-control"
-      placeholder="Nombre"
-      (ngModelChange)="handleChange({ name: 'nombre', value: $event })"
-    />
-  </div>
-  <div class="mb-3">
-    <input
-      type="number"
-      formControlName="precio"
-      class="form-control"
-      placeholder="Precio"
-      (ngModelChange)="handleChange({ name: 'precio', value: $event })"
-    />
-  </div>
-  <div class="mb-3">
-    <textarea
-      type="text"
-      formControlName="descripcion"
-      class="form-control"
-      placeholder="Descripción"
-      (ngModelChange)="handleChange({ name: 'descripcion', value: $event })"
-    ></textarea>
-  </div>
-  <div class="mb-3">
-    <input
-      type="file"
-      class="form-control"
-      formControlName="file"
-      (change)="handleChangeFile($event)"
-    />
-  </div>
+<html lang="es">
+  <form [formGroup]="formGroup" (ngSubmit)="addOrEdit()">
+    <div class="mb-3">
+      <input
+        type="text"
+        formControlName="nombre"
+        class="form-control"
+        placeholder="Nombre"
+        (ngModelChange)="handleChange({ name: 'nombre', value: $event })"
+      />
+    </div>
+    <div class="mb-3">
+      <input
+        type="number"
+        formControlName="precio"
+        class="form-control"
+        placeholder="Precio"
+        (ngModelChange)="handleChange({ name: 'precio', value: $event })"
+      />
+    </div>
+    <div class="mb-3">
+      <textarea
+        type="text"
+        formControlName="descripcion"
+        class="form-control"
+        placeholder="Descripción"
+        (ngModelChange)="handleChange({ name: 'descripcion', value: $event })"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="archivo" class="form-label">Seleccionar archivo</label>
 
-  <button class="btn btn-primary form-control" [disabled]="formGroup.invalid">
-    {{ textButtonSubmit }}
-  </button>
-</form>
+      <input
+        type="file"
+        class="form-control"
+        formControlName="file"
+        (change)="handleChangeFile($event)"
+        aria-label="Seleccionar archivo"
+      />
+    </div>
+
+    <button class="btn btn-primary form-control" [disabled]="formGroup.invalid">
+      {{ textButtonSubmit }}
+    </button>
+  </form>
+</html>
