@@ -81,6 +81,10 @@
               "browserTarget": "angular-comedor-untels:build:development"
             }
           },
+          "options": {
+            "host": "0.0.0.0",
+            "disableHostCheck": true
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

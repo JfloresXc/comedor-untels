@@ -1,0 +1,17 @@
+tasks:
+  - init: |
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      nvm install 16.20.2
+      nvm use 16.20.2
+    command: |
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      node -v
+      npm install
+      npm start
+
+ports:
+  - port: 4200
+    onOpen: open-preview
