@@ -1,10 +1,16 @@
 tasks:
   - init: |
+      echo "Installing nvm and Node.js..."
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      echo "Node.js version before changing:"
+      node -v || echo "Node.js not installed"
       nvm install 16.20.2
       nvm use 16.20.2
+      echo "Node.js version after changing:"
+      node -v
+      echo "Updating packages and installing dependencies..."
       sudo apt-get update
       sudo apt-get install -y \
           libatk1.0-0 \
@@ -24,7 +30,9 @@ tasks:
           libxfixes3
     command: |
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      echo "Using Node.js version:"
+      nvm use 16.20.2
       node -v
       npm install
       npm start
@@ -32,7 +40,10 @@ tasks:
   - name: Run Tests
     before: |
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      echo "Using Node.js version for tests:"
+      nvm use 16.20.2
+      node -v
       npm install
     command: npm run test
 
