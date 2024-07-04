@@ -16,16 +16,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-comedor-untels'`, () => {
+  it(`should have a default user`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-comedor-untels');
+    expect(app.user).toEqual(jasmine.any(Object));
   });
 
-  it('should render title', () => {
+  it('should render loading spinner when isLoading is true', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    fixture.componentInstance.isLoading = true;
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-comedor-untels app is running!');
+    expect(compiled.querySelector('.loading-spinner')).toBeTruthy();
   });
 });
