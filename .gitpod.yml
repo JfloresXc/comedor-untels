@@ -4,6 +4,7 @@ tasks:
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
       echo "Node.js version before changing:"
       node -v || echo "Node.js not installed"
       nvm install 16.20.2
@@ -31,6 +32,7 @@ tasks:
     command: |
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
       echo "Using Node.js version:"
       nvm use 16.20.2
       node -v
@@ -41,6 +43,7 @@ tasks:
     before: |
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
       echo "Using Node.js version for tests:"
       nvm use 16.20.2
       node -v
