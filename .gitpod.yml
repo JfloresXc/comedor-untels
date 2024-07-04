@@ -33,8 +33,11 @@ tasks:
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
       [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-      echo "Using Node.js version:"
+      if ! nvm ls 16.20.2 > /dev/null 2>&1; then
+        nvm install 16.20.2
+      fi
       nvm use 16.20.2
+      echo "Using Node.js version:"
       node -v
       npm install
       npm start
@@ -44,8 +47,11 @@ tasks:
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
       [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-      echo "Using Node.js version for tests:"
+      if ! nvm ls 16.20.2 > /dev/null 2>&1; then
+        nvm install 16.20.2
+      fi
       nvm use 16.20.2
+      echo "Using Node.js version for tests:"
       node -v
       npm install
     command: npm run test
