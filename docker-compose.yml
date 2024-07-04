@@ -5,11 +5,9 @@ services:
   angular:
     image: node:16.20.2
     working_dir: /workspace
-    environment:
-      - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
       - .:/workspace
     ports:
       - "4200:4200"
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm install && node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0"
 
