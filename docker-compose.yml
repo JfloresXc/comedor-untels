@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  angular:
+  node:
     image: node:16.20.2
     working_dir: /workspace
     volumes:
       - .:/workspace
     ports:
       - "4200:4200"
-    command: sh -c "npm install"
+    command: sh -c "npm install && npm start"
