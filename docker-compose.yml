@@ -1,0 +1,12 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  angular:
+    image: node:16
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    ports:
+      - "4200:4200"
+    command: sh -c "npm install && npm start"

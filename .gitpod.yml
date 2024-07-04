@@ -1,0 +1,8 @@
+# gitpod.yml
+tasks:
+  - init: docker-compose build
+    command: docker-compose up
+
+ports:
+  - port: 4200
+    onOpen: open-preview
