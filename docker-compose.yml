@@ -5,6 +5,8 @@ services:
   angular:
     image: node:16.20.2
     working_dir: /workspace
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
       - .:/workspace
     ports:
