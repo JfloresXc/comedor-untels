@@ -27,7 +27,9 @@ tasks:
           libxfixes3
       echo "Node.js version before changing:"
       node -v || echo "Node.js not installed"
+      source ~/.bashrc
       nvm install 16.20.2
+      nvm alias default 16.20.2
       nvm use 16.20.2
       echo "Node.js version after changing:"
       node -v
