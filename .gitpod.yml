@@ -1,12 +1,15 @@
 tasks:
   - init: |
+      echo "Installing nvm and Node.js..."
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-      nvm install 16.20.2
-      nvm use 16.20.2
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+      echo "Updating packages and installing dependencies..."
       sudo apt-get update
       sudo apt-get install -y \
+          build-essential \
+          libssl-dev \
           libatk1.0-0 \
           libatk-bridge2.0-0 \
           libcups2 \
@@ -22,20 +25,36 @@ tasks:
           libxss1 \
           libasound2 \
           libxfixes3
+      echo "Node.js version before changing:"
+      node -v || echo "Node.js not installed"
+      nvm install 16.20.2
+      nvm use 16.20.2
+      echo "Node.js version after changing:"
+      node -v
+      echo "Installing project dependencies..."
+      npm install
     command: |
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+      nvm use 16.20.2
+      echo "Using Node.js version:"
       node -v
-      npm install
       npm start
 
   - name: Run Tests
     before: |
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+      nvm use 16.20.2
+      echo "Using Node.js version for tests:"
+      node -v
       npm install
     command: npm run test
 
 ports:
   - port: 4200
+    onOpen: open-preview
+  - port: 8080
     onOpen: open-preview
