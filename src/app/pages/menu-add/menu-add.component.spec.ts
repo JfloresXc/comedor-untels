@@ -1,25 +1,36 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { FoodsService } from 'src/app/services/food/foods.service';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 
-import { MenuAddComponent } from './menu-add.component';
+@Component({
+  selector: 'app-menu-add',
+  templateUrl: './menu-add.component.html',
+})
+export class MenuAddComponent implements OnInit {
+  isLoading: boolean = false;
+  foods: any[] = [];
 
-describe('MenuAddComponent', () => {
-  let component: MenuAddComponent;
-  let fixture: ComponentFixture<MenuAddComponent>;
+  constructor(
+    private loadingService: LoadingService,
+    private foodsService: FoodsService
+  ) {}
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MenuAddComponent ]
-    })
-    .compileComponents();
-  });
+  ngOnInit(): void {
+    this.fetchFoods(); // Llama a una función para cargar los alimentos
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MenuAddComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    // Suscripción al observable de cambio en la carga
+    this.loadingService.loading$.subscribe((isLoadingKey) => {
+      this.isLoading = isLoadingKey;
+    });
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  fetchFoods() {
+    // Obtiene los alimentos desde el servicio de alimentos
+    this.foodsService.foods$.subscribe((foods) => {
+      this.foods = foods;
+    });
+
+    // También asigna los alimentos directamente si ya están disponibles
+    this.foods = this.foodsService.foods;
+  }
+}
