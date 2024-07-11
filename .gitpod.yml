@@ -9,28 +9,6 @@ tasks:
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
       [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-      echo "Updating packages and installing dependencies..."
-      sudo apt-get update
-      sudo apt-get install -y \
-          build-essential \
-          libssl-dev \
-          libatk1.0-0 \
-          libatk-bridge2.0-0 \
-          libcups2 \
-          libxcomposite1 \
-          libxrandr2 \
-          libxdamage1 \
-          libxkbcommon0 \
-          libpango-1.0-0 \
-          libpangocairo-1.0-0 \
-          libgbm-dev \
-          libnss3 \
-          libxshmfence-dev \
-          libxss1 \
-          libasound2 \
-          libxfixes3
-      echo "Node.js version before changing:"
-      node -v || echo "Node.js not installed"
       source ~/.bashrc
       nvm install 16.20.2
       nvm alias default 16.20.2
@@ -39,6 +17,8 @@ tasks:
       node -v
       echo "Installing project dependencies..."
       npm install
+      echo "Installing Angular CLI globally..."
+      npm install -g @angular/cli
       echo "Installing Cypress..."
       npx cypress install
     command: |
@@ -63,6 +43,10 @@ tasks:
 
   - name: install cypress to workspace
     init: |
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+        nvm use 16.20.2
         npx cypress install
 
   - name: run chrome tests
