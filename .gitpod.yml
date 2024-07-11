@@ -28,42 +28,7 @@ tasks:
       nvm use 16.20.2
       echo "Using Node.js version:"
       node -v
-      npm start
-
-  - name: Run Tests
-    before: |
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-      nvm use 16.20.2
-      echo "Using Node.js version for tests:"
-      node -v
-      npm install
-    command: npm run test
-
-  - name: install cypress to workspace
-    init: |
-        export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-        nvm use 16.20.2
-        npx cypress install
-
-  - name: run chrome tests
-    command: |
-        export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-        nvm use 16.20.2
-        yes | npx cypress run --browser chrome
-
-  - name: open cypress application
-    command: |
-        export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-        nvm use 16.20.2
-        yes | npx cypress open
+      npm run start
 
 ports:
   - port: 4200
