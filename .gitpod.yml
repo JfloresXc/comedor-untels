@@ -1,3 +1,7 @@
+# .gitpod.yml
+image:
+  file: .gitpod.Dockerfile
+
 tasks:
   - init: |
       echo "Installing nvm and Node.js..."
@@ -35,6 +39,8 @@ tasks:
       node -v
       echo "Installing project dependencies..."
       npm install
+      echo "Installing Cypress..."
+      npx cypress install
     command: |
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
@@ -55,8 +61,32 @@ tasks:
       npm install
     command: npm run test
 
+  - name: install cypress to workspace
+    init: |
+        npx cypress install
+
+  - name: run chrome tests
+    command: |
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+        nvm use 16.20.2
+        yes | npx cypress run --browser chrome
+
+  - name: open cypress application
+    command: |
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+        nvm use 16.20.2
+        yes | npx cypress open
+
 ports:
   - port: 4200
     onOpen: open-preview
   - port: 8080
+    onOpen: open-preview
+  - port: 5900
+    onOpen: ignore
+  - port: 6080
     onOpen: open-preview
