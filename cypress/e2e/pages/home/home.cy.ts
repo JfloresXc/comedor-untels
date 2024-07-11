@@ -2,7 +2,7 @@
 
 describe('Comedor Untels Website', () => {
   beforeEach(() => {
-      cy.visit('http://localhost:4200/');
+      cy.visit('/');
   });
 
   describe('Navbar Component', () => {

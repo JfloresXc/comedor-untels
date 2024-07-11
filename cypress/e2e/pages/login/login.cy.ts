@@ -2,7 +2,7 @@
 
 describe('Login Form', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:4200/login');
+      cy.visit('/login');
     });
   
     it('Should display the login form', () => {

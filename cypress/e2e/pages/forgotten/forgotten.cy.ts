@@ -2,7 +2,7 @@
 
 describe('Forgot Password Form', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:4200/forgotten');
+      cy.visit('/forgotten');
     });
   
     it('Should display the forgot password form', () => {
